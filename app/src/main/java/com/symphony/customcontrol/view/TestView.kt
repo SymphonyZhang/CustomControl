@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 
@@ -97,7 +98,28 @@ class TestView: View {
          *
          * 绘制圆形有四个参数，前两个是圆心坐标，第三个是半径，最后一个是画笔。
          */
-        canvas.drawCircle(500f,500f,400f,mPaint)    // 绘制一个圆心坐标在(500,500)，半径为400 的圆。
+        //canvas.drawCircle(500f,500f,400f,mPaint)    // 绘制一个圆心坐标在(500,500)，半径为400 的圆。
+        /**
+         * 绘制圆弧
+         *
+         * startAngle //开始角度
+         * sweepAngle //扫过角度
+         * useCenter  //是否使用中心 画出的图形是否连接中心，true：连接中心形成扇形图形，false不连接中心，起始点和结束点相连
+         *
+         * 第一种
+         * public void drawArc(@NonNull RectF oval, float startAngle, float sweepAngle, boolean useCenter, @NonNull Paint paint){}
+         * 第二种
+         * public void drawArc(float left, float top, float right, float bottom, float startAngle,float sweepAngle, boolean useCenter, @NonNull Paint paint) {}
+         *
+         */
+        val rectF = RectF(100f,100f,800f,800f)
+        //绘制背景矩形
+        mPaint.color = Color.GRAY
+        canvas.drawRect(rectF,mPaint)
+
+        //绘制圆弧
+        mPaint.color = Color.BLUE
+        canvas.drawArc(rectF,0f,270f,true,mPaint)
     }
 
 }
