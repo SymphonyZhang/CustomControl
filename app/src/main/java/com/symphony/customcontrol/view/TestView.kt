@@ -75,11 +75,22 @@ class TestView: View {
          * 圆角矩形的角实际上不是一个正圆的圆弧，而是椭圆的圆弧，这里的两个参数实际上是椭圆的两个半径
          */
         //1.第一种
-        val rectF = RectF(100f,100f,800f,400f)
-        canvas.drawRoundRect(rectF,30f,30f,mPaint)
+        /*val rectF = RectF(100f,100f,800f,400f)
+        canvas.drawRoundRect(rectF,30f,30f,mPaint)*/
         //2.第二种
-        canvas.drawRoundRect(100f,100f,800f,400f,30f,30f,mPaint)
-
+        //canvas.drawRoundRect(100f,100f,800f,400f,30f,30f,mPaint)
+        /**
+         * 绘制椭圆
+         *
+         * drawOval
+         *
+         * 绘制椭圆实际上就是绘制一个矩形的内切图形
+         */
+        //1.第一种
+        val rectF = RectF(100f,100f,800f,400f)
+        canvas.drawOval(rectF,mPaint)
+        //2.第二种
+        canvas.drawOval(100f,100f,800f,400f,mPaint)
     }
 
 }
