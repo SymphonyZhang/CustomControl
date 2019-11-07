@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 
@@ -46,8 +45,8 @@ class TestView: View {
          * drawLine
          * drawLines
          */
-        //canvas.drawLine(300f,300f,500f,600f,mPaint)
-        //canvas.drawLines(floatArrayOf(100f,200f,200f,200f,100f,300f,200f,300f),mPaint)
+        //canvas.drawLine(300f,300f,500f,600f,mPaint)                                       // 在坐标(300,300)(500,600)之间绘制一条直线
+        //canvas.drawLines(floatArrayOf(100f,200f,200f,200f,100f,300f,200f,300f),mPaint)    // 绘制一组线 每四数字(两个点的坐标)确定一条线
         /**
          * 绘制矩形
          *
@@ -87,10 +86,18 @@ class TestView: View {
          * 绘制椭圆实际上就是绘制一个矩形的内切图形
          */
         //1.第一种
-        val rectF = RectF(100f,100f,800f,400f)
-        canvas.drawOval(rectF,mPaint)
+        /*val rectF = RectF(100f,100f,800f,400f)
+        canvas.drawOval(rectF,mPaint)*/
         //2.第二种
-        canvas.drawOval(100f,100f,800f,400f,mPaint)
+        //canvas.drawOval(100f,100f,800f,400f,mPaint)
+        /**
+         * 绘制圆
+         *
+         * drawCircle
+         *
+         * 绘制圆形有四个参数，前两个是圆心坐标，第三个是半径，最后一个是画笔。
+         */
+        canvas.drawCircle(500f,500f,400f,mPaint)    // 绘制一个圆心坐标在(500,500)，半径为400 的圆。
     }
 
 }
