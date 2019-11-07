@@ -31,9 +31,22 @@ class TestView: View {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        /**
+         * drawColor
+         */
         //canvas.drawColor(Color.BLUE)                    //画布绘制蓝色
-        canvas.drawPoint(200f,200f,mPaint)        //在坐标(200,200)位置绘制一个点
-        canvas.drawPoints(floatArrayOf(500f,500f,500f,600f,500f,700f),mPaint)
+        /**
+         * drawPoint
+         * drawPoints
+         */
+//        canvas.drawPoint(200f,200f,mPaint)        //在坐标(200,200)位置绘制一个点
+//        canvas.drawPoints(floatArrayOf(500f,500f,500f,600f,500f,700f),mPaint)
+        /**
+         * drawLine
+         * drawLines
+         */
+        canvas.drawLine(300f,300f,500f,600f,mPaint)
+        canvas.drawLines(floatArrayOf(100f,200f,200f,200f,100f,300f,200f,300f),mPaint)
     }
 
 }
