@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 
@@ -26,6 +25,12 @@ class TestView: View {
 
     private fun initPaint(){
         mPaint.color = Color.BLACK          //设置画笔颜色
+        /**
+         * 画笔三种模式：
+         * STOKE：描边
+         * FILL： 填充
+         * FILL_AND_STROKE： 描边加填充
+         */
         mPaint.style = Paint.Style.FILL     //设置画笔模式为填充
         mPaint.strokeWidth = 10f            //设置画笔宽度为10px
     }
@@ -112,14 +117,29 @@ class TestView: View {
          * public void drawArc(float left, float top, float right, float bottom, float startAngle,float sweepAngle, boolean useCenter, @NonNull Paint paint) {}
          *
          */
-        val rectF = RectF(100f,100f,800f,800f)
+        /*val rectF = RectF(100f,100f,800f,800f)
         //绘制背景矩形
         mPaint.color = Color.GRAY
         canvas.drawRect(rectF,mPaint)
 
         //绘制圆弧
         mPaint.color = Color.BLUE
-        canvas.drawArc(rectF,0f,270f,true,mPaint)
+        canvas.drawArc(rectF,0f,270f,true,mPaint)*/
+
+        /**
+         * Paint设置
+         */
+        mPaint.color = Color.BLUE
+        mPaint.strokeWidth = 40f
+        //1.描边
+        mPaint.style = Paint.Style.STROKE
+        canvas.drawCircle(200f,200f,100f,mPaint)
+        //2.填充
+        mPaint.style = Paint.Style.FILL
+        canvas.drawCircle(200f,500f,100f,mPaint)
+        //3.描边加填充
+        mPaint.style = Paint.Style.FILL_AND_STROKE
+        canvas.drawCircle(200f,800f,100f,mPaint)
     }
 
 }
