@@ -32,7 +32,7 @@ class TestView: View {
          * FILL_AND_STROKE： 描边加填充
          */
         mPaint.style = Paint.Style.FILL     //设置画笔模式为填充
-        mPaint.strokeWidth = 10f            //设置画笔宽度为10px
+        mPaint.strokeWidth = 2f            //设置画笔宽度为10px
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -129,7 +129,7 @@ class TestView: View {
         /**
          * Paint设置
          */
-        mPaint.color = Color.BLUE
+        /*mPaint.color = Color.BLUE
         mPaint.strokeWidth = 40f
         //1.描边
         mPaint.style = Paint.Style.STROKE
@@ -139,7 +139,18 @@ class TestView: View {
         canvas.drawCircle(200f,500f,100f,mPaint)
         //3.描边加填充
         mPaint.style = Paint.Style.FILL_AND_STROKE
-        canvas.drawCircle(200f,800f,100f,mPaint)
+        canvas.drawCircle(200f,800f,100f,mPaint)*/
+
+        /**
+         * translate 画布位移
+         */
+        mPaint.color = Color.BLACK
+        canvas.translate(200f,200f)
+        canvas.drawCircle(0f,0f,100f,mPaint)
+
+        mPaint.color = Color.BLUE
+        canvas.translate(200f,200f)
+        canvas.drawCircle(0f,0f,100f,mPaint)
     }
 
 }
