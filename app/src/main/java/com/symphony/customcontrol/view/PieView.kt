@@ -84,25 +84,23 @@ class PieView: View {
         invalidate()
     }
 
-    fun initData(mData:List<PieData>?){
+    private fun initData(mData:List<PieData>?){
         if(null == mData || mData.isEmpty()){       //如果数据有问题，直接返回
             return
         }
-        var sumValue:Float = 0f
-        for (i in mData.indices){
-            var pie:PieData = mData[i]
-            sumValue += pie.value                   //计算所有数据的总和
-            var j = i%mColors.size                  //设置颜色
-            pie.color = mColors[j]
+        var sumValue = 0f
+        for (pie in mData){
+            sumValue+=pie.value                     //计算所有数据的总和
         }
 
-        var sumAngle:Float = 0f
+        var sumAngle = 0f
         for(i in mData.indices){
             var pie:PieData = mData[i]
 
             val percentage = pie.value/sumValue     //计算百分比
             val angle = percentage * 360            //计算对应的角度
-
+            var j = i%mColors.size                  //设置颜色
+            pie.color = mColors[j]
             pie.percentage = percentage             //记录百分比
             pie.angle = angle                       //记录角度大小
 
