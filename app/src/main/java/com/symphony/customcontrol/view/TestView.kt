@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 
@@ -16,6 +17,9 @@ import android.view.View
 class TestView: View {
 
     private val mPaint = Paint()
+    //宽高
+    private var mWidth:Int = 0
+    private var mHeight:Int = 0
 
     constructor(context: Context):super(context)
 
@@ -32,7 +36,13 @@ class TestView: View {
          * FILL_AND_STROKE： 描边加填充
          */
         mPaint.style = Paint.Style.FILL     //设置画笔模式为填充
-        mPaint.strokeWidth = 2f            //设置画笔宽度为10px
+        mPaint.strokeWidth = 20f            //设置画笔宽度为10px
+    }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        mWidth = w
+        mHeight =h
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -144,13 +154,41 @@ class TestView: View {
         /**
          * translate 画布位移
          */
-        mPaint.color = Color.BLACK
+        /*mPaint.color = Color.BLACK
         canvas.translate(200f,200f)
         canvas.drawCircle(0f,0f,100f,mPaint)
 
         mPaint.color = Color.BLUE
         canvas.translate(200f,200f)
-        canvas.drawCircle(0f,0f,100f,mPaint)
+        canvas.drawCircle(0f,0f,100f,mPaint)*/
+
+        /**
+         * scale 缩放
+         *
+         * 1. public void scale(float sx,float sy)                      //sx x轴缩放比你，sy y轴缩放比你  负数会翻转镜像成像
+         *
+         * 2. public void scale(float sx,float sy,float px,float py)    //sx x轴缩放比你，sy y轴缩放比你  负数会翻转镜像成像   px,py 控制缩放中心位置
+         */
+        //将坐标系原点移动到画布正中心
+        /*canvas.translate(mWidth/2f,mHeight/2f)
+        val rect = RectF(0f,-400f,400f,0f)      //矩形区域
+        */
+        /*mPaint.color = Color.BLACK                                        //绘制黑色矩形
+        canvas.drawRect(rect,mPaint)
+        */
+        //canvas.scale(0.5f,0.5f/*,200f,-200f*/)                //绘制蓝色矩形
+        //canvas.scale(0.5f,0.5f,200f,-200f)            //绘制蓝色矩形 添加了缩放中心
+        /*canvas.scale(-0.5f,-0.5f,200f,0f)            //绘制蓝色矩形    负数比例会造成镜像翻转
+        mPaint.color = Color.BLUE
+        canvas.drawRect(rect,mPaint)
+        */
+        mPaint.style = Paint.Style.STROKE
+        canvas.translate(mWidth/2f,mHeight/2f)
+        val rect = RectF(-400f,-400f,400f,400f)
+        for (i in 0 until 20) {
+            canvas.scale(0.9f,0.9f)
+            canvas.drawRect(rect,mPaint)
+        }
     }
 
 }
