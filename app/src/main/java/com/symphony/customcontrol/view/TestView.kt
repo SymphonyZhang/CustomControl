@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 
@@ -36,7 +35,7 @@ class TestView: View {
          * FILL_AND_STROKE： 描边加填充
          */
         mPaint.style = Paint.Style.FILL     //设置画笔模式为填充
-        mPaint.strokeWidth = 20f            //设置画笔宽度为10px
+        mPaint.strokeWidth = 10f            //设置画笔宽度为10px
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -182,12 +181,40 @@ class TestView: View {
         mPaint.color = Color.BLUE
         canvas.drawRect(rect,mPaint)
         */
-        mPaint.style = Paint.Style.STROKE
+        /*mPaint.style = Paint.Style.STROKE
         canvas.translate(mWidth/2f,mHeight/2f)
         val rect = RectF(-400f,-400f,400f,400f)
         for (i in 0 until 20) {
             canvas.scale(0.9f,0.9f)
             canvas.drawRect(rect,mPaint)
+        }*/
+
+        /**
+         * rotate
+         *
+         * 1.public void rotate(float degrees)                      //degrees 旋转度数
+         *
+         * 2.public void rotate(float degrees,float px,float py)    //degrees 旋转度数   px,py 控制缩放中心位置
+         */
+        /*canvas.translate(mWidth/2f,mHeight/2f)
+        val rect = RectF(0f,-400f,400f,0f)  //矩形
+        mPaint.color = Color.BLACK                                      //绘制黑色矩形
+        canvas.drawRect(rect,mPaint)
+
+        //canvas.rotate(180f)                                 //旋转180度 默认旋转中心为原点
+        canvas.rotate(180f,200f,0f)                                 //旋转180度 默认旋转中心为原点 添加了旋转中心
+        mPaint.color = Color.BLUE                                    //绘制蓝色矩形
+        canvas.drawRect(rect,mPaint)*/
+
+        mPaint.style = Paint.Style.STROKE
+        mPaint.strokeWidth = 5f
+        canvas.translate(mWidth/2f,mHeight/2f)
+
+        canvas.drawCircle(0f,0f,400f,mPaint)
+        canvas.drawCircle(0f,0f,380f,mPaint)
+        for (i in 0 until 36){
+            canvas.drawLine(0f,380f,0f,400f,mPaint)
+            canvas.rotate(10f)
         }
     }
 
