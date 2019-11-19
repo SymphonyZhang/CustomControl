@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 
@@ -206,7 +207,7 @@ class TestView: View {
         mPaint.color = Color.BLUE                                    //绘制蓝色矩形
         canvas.drawRect(rect,mPaint)*/
 
-        mPaint.style = Paint.Style.STROKE
+        /*mPaint.style = Paint.Style.STROKE
         mPaint.strokeWidth = 5f
         canvas.translate(mWidth/2f,mHeight/2f)
 
@@ -215,7 +216,26 @@ class TestView: View {
         for (i in 0 until 36){
             canvas.drawLine(0f,380f,0f,400f,mPaint)
             canvas.rotate(10f)
-        }
+        }*/
+        /**
+         * skew
+         *
+         * public void skew (float sx, float sy)
+         */
+         mPaint.style = Paint.Style.STROKE
+        mPaint.strokeWidth = 3f
+        canvas.translate(mWidth/2f,mHeight/2f)
+        val rect = RectF(0f,0f,200f,200f)
+        mPaint.color = Color.BLACK
+        canvas.drawRect(rect,mPaint)
+
+        canvas.skew(1f,0f)
+        mPaint.color = Color.BLUE
+        canvas.drawRect(rect,mPaint)
+
+        canvas.skew(0f,1f)
+        mPaint.color = Color.RED
+        canvas.drawRect(rect,mPaint)
     }
 
 }
