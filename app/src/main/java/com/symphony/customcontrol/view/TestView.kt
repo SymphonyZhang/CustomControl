@@ -4,7 +4,8 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.Picture
+import android.graphics.drawable.PictureDrawable
 import android.util.AttributeSet
 import android.view.View
 
@@ -20,11 +21,30 @@ class TestView: View {
     //宽高
     private var mWidth:Int = 0
     private var mHeight:Int = 0
+    //1.创建Picture
+    private var mPicture = Picture()
 
-    constructor(context: Context):super(context)
+    constructor(context: Context):this(context,null)
 
-    constructor(context: Context,attrs: AttributeSet):super(context,attrs){
+    constructor(context: Context,attrs: AttributeSet?):super(context,attrs){
         initPaint()
+        recording()
+    }
+
+    //2.录制内容方法
+    private fun recording(){
+        //开始录制（接收返回值Canvas）
+        var canvas = mPicture.beginRecording(500,500)
+        //创建一个画笔
+        var paint = Paint()
+        paint.color = Color.BLUE
+        paint.style = Paint.Style.FILL
+        //在Canvas中具体操作
+        //位移
+        canvas.translate(250f,250f)
+        //绘制一个圆
+        canvas.drawCircle(0f,0f,100f,paint)
+        mPicture.endRecording()
     }
 
     private fun initPaint(){
@@ -222,7 +242,7 @@ class TestView: View {
          *
          * public void skew (float sx, float sy)
          */
-         mPaint.style = Paint.Style.STROKE
+        /*mPaint.style = Paint.Style.STROKE
         mPaint.strokeWidth = 3f
         canvas.translate(mWidth/2f,mHeight/2f)
         val rect = RectF(0f,0f,200f,200f)
@@ -235,7 +255,35 @@ class TestView: View {
 
         canvas.skew(0f,1f)
         mPaint.color = Color.RED
-        canvas.drawRect(rect,mPaint)
+        canvas.drawRect(rect,mPaint)*/
+        /**
+         * 使用Picture提供的draw方法绘制：
+         * 这种方法在比较低版本的系统上绘制后可能会影响Canvas状态，所以这种方法一般不会使用。
+         */
+        //将Picture中的内容绘制在Canvas上
+        //mPicture.draw(canvas)
+        /**
+         * 使用Canvas提供的drawPicture方法绘制
+         * drawPicture有三种方法：
+         * public void drawPicture (Picture picture)
+         * public void drawPicture (Picture picture, Rect dst)
+         * public void drawPicture (Picture picture, RectF dst)
+         *
+         * 和使用Picture的draw方法不同，Canvas的drawPicture不会影响Canvas状态。
+         */
+        //canvas.drawPicture(mPicture)
+        //canvas.drawPicture(mPicture,RectF(0f,0f,mPicture.width.toFloat(),200f))
+        /**
+         * 将Picture包装成为PictureDrawable，使用PictureDrawable的draw方法绘制
+         *
+         * 此处setBounds是设置在画布上的绘制区域，并非根据该区域进行缩放，也不是剪裁Picture，每次都从Picture的左上角开始绘制
+         */
+        //包装成Drawable
+        val drawable = PictureDrawable(mPicture)
+        //设置绘制区域 -- 注意此处所绘制的实际内容不会缩放
+        drawable.setBounds(0,0,250,mPicture.height)
+        //绘制
+        drawable.draw(canvas)
     }
 
 }
