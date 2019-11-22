@@ -1,13 +1,10 @@
 package com.symphony.customcontrol.view
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Picture
-import android.graphics.drawable.PictureDrawable
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import com.symphony.customcontrol.R
 
 /**
  * @Author yx.zhang
@@ -278,12 +275,39 @@ class TestView: View {
          *
          * 此处setBounds是设置在画布上的绘制区域，并非根据该区域进行缩放，也不是剪裁Picture，每次都从Picture的左上角开始绘制
          */
+        /*
         //包装成Drawable
         val drawable = PictureDrawable(mPicture)
         //设置绘制区域 -- 注意此处所绘制的实际内容不会缩放
         drawable.setBounds(0,0,250,mPicture.height)
         //绘制
         drawable.draw(canvas)
+        */
+        /**
+         *  第一种
+         *  public void drawBitmap (Bitmap bitmap, Matrix matrix, Paint paint)
+         *  第二种
+         *  public void drawBitmap (Bitmap bitmap, float left, float top, Paint paint)
+         *  第三种
+         *  public void drawBitmap (Bitmap bitmap, Rect src, Rect dst, Paint paint)
+         *  public void drawBitmap (Bitmap bitmap, Rect src, RectF dst, Paint paint)
+         */
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.bitmap)
+        //第一种
+        //canvas.drawBitmap(bitmap, Matrix(),Paint())
+        //第二种
+        //canvas.drawBitmap(bitmap,200f,500f,Paint())
+        //第三种
+        //将画布坐标系移动到画布中央
+        canvas.translate((mWidth/2).toFloat(),(mHeight/2).toFloat())
+        //指定图片绘制区域(左上角的四分之一)
+        val src = Rect(0,0,bitmap.width/2,bitmap.width/2)
+        //指定图片在屏幕上显示的区域
+        val dst = Rect(0,0,200,400)
+        //绘制图片
+        canvas.drawBitmap(bitmap,src,dst,null)
+
+
     }
 
 }
