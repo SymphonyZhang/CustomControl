@@ -1,15 +1,26 @@
 package com.symphony.customcontrol
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.symphony.customcontrol.view.TestView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val testView = TestView(this@MainActivity)
-        setContentView(testView)
+        setContentView(R.layout.activity_main)
 
+    }
+
+    fun click(view: View){
+        when(view){
+            btn_check-> {
+                cv.check()
+            }
+            btn_uncheck->{
+                cv.unCheck()
+            }
+        }
     }
 }
